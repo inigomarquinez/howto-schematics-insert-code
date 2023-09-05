@@ -1,0 +1,9 @@
+{
+  "$schema": "../node_modules/@angular-devkit/schematics/collection-schema.json",
+  "schematics": {
+    "insert-code": {
+      "description": "Schematic to insert static code into a file.",
+      "factory": "./insert-code/index#main"
+    }
+  }
+}
