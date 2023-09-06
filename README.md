@@ -41,3 +41,8 @@ npm publish
 ```
 
 That's it!
+
+### 🔗 Useful links
+
+- [Schematics official documentation](https://angular.io/guide/schematics)
+- [Update and insert auto-generated code to existing Typescript, HTML and JSON files with Angular schematics Pt.1](https://medium.com/humanitec-developers/update-and-insert-auto-generated-code-to-existing-typescript-html-and-json-files-with-angular-f0b00f22fb52)
