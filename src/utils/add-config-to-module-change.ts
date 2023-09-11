@@ -33,7 +33,7 @@ export function addConfigToModuleChange(context: any, tree: Tree): any {
   let nodes: ts.Node[] = getSourceNodes(sourceFile);
 
   // console.log(JSON.stringify(inspect(nodes)));
-  printToFile('./nodes.json', inspect(nodes));
+  printToFile(nodes);
 
   // // find the people node by checking the SyntaxKind to be Identifier and by checking the node text to be people
   const importNodes = nodes.filter(n => n.kind === ts.SyntaxKind.ImportDeclaration);
