@@ -1,4 +1,5 @@
 import {Rule, SchematicsException, Tree} from "@angular-devkit/schematics";
+import { InsertChange } from "@schematics/angular/utility/change";
 import {addConfigToModuleChange} from '../utils/add-config-to-module-change';
 import {addImportsToFileChange} from '../utils/add-imports-to-file-change';
 
@@ -9,14 +10,24 @@ export function addConfigToModuleRule(_options: any): Rule {
     let sourceText = tree.readText(path);
     if (!sourceText) throw new SchematicsException(`File does not exist.`);
 
-    const importsChange = addImportsToFileChange(sourceText, {path});
-    const moduleChange = addConfigToModuleChange(sourceText, {path});
+    try {
+      const importsChanges = addImportsToFileChange(sourceText, {path});
+      const moduleChange = addConfigToModuleChange(sourceText, {path});
 
-    const declarationRecorder = tree.beginUpdate(path);
-    declarationRecorder.insertLeft(importsChange.pos, importsChange.toAdd);
-    declarationRecorder.insertLeft(moduleChange.pos, moduleChange.toAdd);
-    tree.commitUpdate(declarationRecorder);
+      const declarationRecorder = tree.beginUpdate(path);
 
-    return tree;
+      for (const change of importsChanges) {
+        if (change instanceof InsertChange) {
+          declarationRecorder.insertLeft(change.pos, change.toAdd)
+        }
+      }
+
+      declarationRecorder.insertLeft(moduleChange.pos, moduleChange.toAdd);
+      tree.commitUpdate(declarationRecorder);
+
+      return tree;
+    } catch (error) {
+      console.error(error)
+    }
   };
 }
