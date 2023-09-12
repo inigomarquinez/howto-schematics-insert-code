@@ -1,6 +1,7 @@
 import * as ts from 'typescript';
 import {getSourceNodes} from "@schematics/angular/utility/ast-utils";
 import {InsertChange} from "@schematics/angular/utility/change";
+import {SchematicsException} from '@angular-devkit/schematics';
 
 
 function isImportIdentifier(node: ts.Node) {
@@ -46,7 +47,7 @@ export function addConfigToModuleChange(sourceText: string, context: any): any {
   const decoratorObject = decoratorNode?.getChildAt(1).getChildAt(2).getChildAt(0).getChildAt(1)
 
   if (!decoratorObject) {
-    throw new Error('Module decorator missing');
+    throw new SchematicsException('Module decorator missing');
   }
 
   const objectProperties = decoratorObject?.getChildren().filter(n => n.kind === ts.SyntaxKind.PropertyAssignment)
