@@ -11,8 +11,8 @@ export function addConfigToModuleRule(_options: any): Rule {
     if (!sourceText) throw new SchematicsException(`File does not exist.`);
 
     try {
-      const importsChanges = addImportsToFileChange(sourceText, {path});
-      const moduleChange = addConfigToModuleChange(sourceText, {path});
+      const importsChanges = addImportsToFileChange(sourceText, path);
+      const moduleChange = addConfigToModuleChange(sourceText, path);
 
       const declarationRecorder = tree.beginUpdate(path);
 
