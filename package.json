@@ -6,7 +6,8 @@
     "build": "tsc -p tsconfig.json",
     "postbuild": "copyfiles -a -u 1 ./src/collection.json ./src/*/schema.json \"./src/*/files/**/*\" dist/",
     "test": "npm run build && jasmine src/**/*_spec.js",
-    "run:insert-code": "npm run build && schematics .:insert-code --debug=false"
+    "run:insert-code": "npm run build && schematics .:insert-code --debug=false",
+    "run:schematic": "schematics .:insert-code --debug=false"
   },
   "keywords": [
     "schematics"
@@ -17,6 +18,7 @@
   "dependencies": {
     "@angular-devkit/core": "^16.2.1",
     "@angular-devkit/schematics": "^16.2.1",
+    "@angular-devkit/schematics-cli": "^16.2.1",
     "@schematics/angular": "^16.2.1",
     "typescript": "~5.1.3"
   },
